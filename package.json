@@ -5,13 +5,16 @@
 	"url":"http://mkant.ru"
   },
   "name": "mk-infopane",
-  "description": "UI widget - sliding messages in height-constrained pane. Library agnostic. Mobile friendly.",
+  "description": "Kind of a status-bar or notifier. Sliding messages in area with limited height.",
   "keywords": [
-    "UI",
-	"widget",
 	"infopane",
+	"statusbar",
+	"notifier",
+	"messages",
+	"alert",
+    "UI",
 	"mobile",
-	"mobile friendly",
+	"widget",
 	"CSS animation"
   ],
   "version": "1.0.0",

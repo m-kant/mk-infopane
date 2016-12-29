@@ -6,6 +6,8 @@ Sliding messages in area with limited height.
 A library agnostic, mobile friendly, css animated UI widget.
 Minimal restrictions on styling.
 
+Developed for mobile, but turned out to be useful for desktops.
+
 [Demo](http://mkant.ru/mink-js/mk-infopane)
 
 Inclusion
