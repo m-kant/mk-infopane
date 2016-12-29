@@ -26,7 +26,7 @@ Create html block you want to use as an infopane.
 
 Create infopane instance, binded to DOM element.
 ```JavaScript
-var pane = new mk.Infopane( document.getElementById('paneElement') );
+var pane = new mk.Infopane( paneElement[,options] );
 ```
 
 Publish messages with different styles to pane
