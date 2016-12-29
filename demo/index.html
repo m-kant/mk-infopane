@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src='https://code.jquery.com/jquery-3.1.1.slim.min.js'></script>
+
+	<script src='helpers/jquery.mk-databridge.min.js'></script>
+	<script src='helpers/demo.js'></script>
+
+	<!-- widget -->
+	<script charset='UTF-8' src='../dist/mk-infopane.js'></script>
+	<link href="../dist/mk-infopane.css" rel="stylesheet">
+
+	<title>mk.infopane</title>
+
+	<style>
+		[data-mk-filter]{border: 1px solid gray; padding: 5px; margin: 1px;}
+		.mk-filter-failed{background-color: red;display: none;}
+		.infopane{background-color: #EDEDED;}
+		.pane-title{padding: 0 5px; color: #666;}
+	</style>
+</head>
+
+<body onload="demoInit();">
+
+<div class="container">
+<div id="topNavEl"></div>
+
+
+	<h1>mk.Infopane</h1>
+	<p>Kind of a status-bar or notifier.
+		Sliding messages in area with limited height.
+		A library agnostic, mobile friendly, css animated UI widget.
+		Minimal restrictions on styling.
+	</p>
+	<div>
+		<a class="btn btn-default" href="https://github.com/m-kant/mk-infopane">Download from GIT Hub</a>
+		<a class="btn btn-default" href="https://www.npmjs.com/package/mk-infopane">Download as NPM package</a>
+	</div>
+
+
+	<h2>Demo</h2>
+
+	<div id="infopaneEl"><div class='pane-title'>This is infopane. Use form below to print messages here.</div></div>
+	<hr />
+
+	<div id="demoFormEl">
+		text: <input class='form-control' type="text" name="text" style="min-width:500px;"/>
+		<div class='row'>
+			<div class="col-sm-6">
+				duration: <input class='form-control' type="text" name="duration" value="5000" style="min-width:100px;"/>
+			</div>
+			<div class="col-sm-6">
+				<br /><label>
+					<input id="infoCloseBut" type="checkbox" name="closeBut" value="1" checked /> closeBut
+				</label><br />
+
+
+				call type:
+				<label>
+					<input type="radio" name="type" value="echo" checked /> echo
+				</label>
+				<label>
+					<input type="radio" name="type" value="ok" /> ok
+				</label>
+				<label>
+					<input type="radio" name="type" value="info" /> info
+				</label>
+				<label>
+					<input type="radio" name="type" value="warn" /> warn
+				</label>
+				<label>
+					<input type="radio" name="type" value="err" /> err
+				</label>
+			</div>
+		</div><!-- .row -->
+		<div class="fiter-container"></div>
+		<hr />
+		<p style='text-align: right;'>
+			<button onclick="randomEcho();" class="btn btn-success">random message</button>
+			<button onclick="info();" class="btn btn-default">print message</button>
+		</p>
+	</div>
+	<hr />
+
+	<h2>Inclusion</h2>
+	<p>Include script and style sheet into you page:</p>
+	<pre>&#60;script src="path/to/plugin/mk-infopane.min.js">&#60;/script>
+&#60;link href="path/to/plugin/mk-infopane.min.css" rel="stylesheet"></pre>
+
+	<h2>Prepare</h2>
+	<p>Create html block you want to use as an infopane.</p>
+	<pre>&#60;div id="paneElement">&#60;/div></pre>
+	<p>Create infopane instance, binded to DOM element.</p>
+	<pre>var pane = new mk.Infopane( paneElement[, options] ) );</pre>
+	<h3>Options</h3>
+	<ul>
+		<li><b>height</b> {<i>integer</i>} default is 36. Height of infopane in pixels.
+		Line height is 18 pixels, so 36 is a two-lines height.</li>
+		<li><b>collapse</b> {<i>boolean</i>} default is false. Infopane can collapse to invisible when no messages.</li>
+		<li><b>onMessage</b> {<i>function</i>} default is null. Callback on every message publish, 'this' argument - is a pane instance, only argument is a message instance.</li>
+		<li><b>onMessageRemove</b> {<i>function</i>} default is null. Callback on every message remove, 'this' - is a pane, only argument is a message.</li>
+	</ul>
+
+	<h2>Usage</h2>
+	<pre>pane.print(options);</pre>
+	<h3>Message options</h3>
+	<ul>
+		<li><b>text</b> {<i>string</i>} text of message, default is empty string</li>
+		<li><b>type</b> {<i>string</i>} type of message: Any string or predefined: <i>echo</i>, <i>ok</i>, <i>info</i>, <i>warn</i> or <i>err</i>.
+			Default is 'echo'. Message element will have css class msg-{type}, for example <i>msg-ok</i> or <i>msg-mytype</i></li>
+		<li><b>duration</b> {<i>integer</i>} duration of message in milliseconds, default is 3000, 0 is infinite</li>
+		<li><b>closeBut</b> {<i>boolean</i>} if true - then close button will be added to the message box, default is true</li>
+	</ul>
+	<h3>Syntax sugar</h3>
+<pre>
+pane.echo(text[, options])
+pane.ok  (text[, options])
+pane.warn(text[, options])
+pane.err (text[, options])
+pane.info(text[, options])
+</pre>
+	<ul>
+		<li><b>text</b> {<i>string</i>} text of message</li>
+		<li><b>options</b> {<i>message options</i>} A 'duration' and 'closeBut' properties. 'text' and 'type' properties will be ignored by this methods</li>
+	</ul>
+
+
+	<h3>Examples</h3>
+<pre>// create infopane instance, binded to DOM element
+var pane = new mk.Infopane( document.getElementById('paneElement') );
+// call methods, corresponding to message status, to print messages
+pane.echo(text, options);
+pane.ok  (text);
+pane.info(text);
+pane.warn(text);
+pane.err (text);</pre>
+		<h2>Messages control</h2>
+<p>If you want to control printed message programmatically, remember message instance in a variable.
+	Then you can change or update text in message or close it by some event.</p>
+<pre>var message = pane.info (text, options); // create and print message
+message.put(newText); // replace text in it
+message.append(additionalText); // add text
+setTimeout(function(){ message.unpublish(); },10000) // close it later
+</pre>
+
+	<h3>Methods</h3>
+	<ul>
+		<li><b>put(message)</b> replaces text of the message</li>
+		<li><b>append(message)</b> adds text to the end of the message</li>
+		<li><b>unpublish()</b> removes message from the pane</li>
+		<li><b>publish()</b> puts message into the pane</li>
+	</ul>
+
+<hr />
+</div><!-- .container -->
+
+
+
+</body>
+</html>

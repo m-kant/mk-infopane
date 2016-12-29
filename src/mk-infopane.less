@@ -8,25 +8,17 @@
 	@color-text:	#000000;
 	@color-text-alt:#ffffff;
 
-	@text-size:	14px;
-	@hpad:0px;
-	@wpad:5px;
-	@lines-in-message: 2;
-	@messages-in-pane: 1;
-	@anim-duration:0.3s;
+	@line-height:	18px;
+	@text-size:		@line-height*0.75;
+	@hpad:			0px;
+	@wpad:			5px;
+	@anim-duration:	0.3s;
 
-	@line-height:		@text-size*1.3;
-	@message-height:	@lines-in-message*@line-height + @hpad*2; // 2 lines including padding
-	@pane-height:		@messages-in-pane*@message-height;
 
 	// ANIMATION KEYFRAMES
 	@keyframes infopane-appear{
 		0%		{max-height:0; opacity:0; padding:0; overflow:hidden;}
-		100%	{max-height:@message-height; opacity:1; overflow:hidden;}
-	}
-	@-webkit-keyframes infopane-appear{
-		0%		{max-height:0; opacity:0; padding:0; overflow:hidden;}
-		100%	{max-height:@message-height; opacity:1; overflow:hidden;}
+		100%	{max-height:@line-height*3; opacity:1; overflow:hidden;}
 	}
 
 	// MIXINS
@@ -51,16 +43,12 @@
 	}
 
 	// STYLES
-	background-color: @color-back;
 	color: @color-text;
-	height: @pane-height;
 	overflow: hidden;
 
 
 	.infopane-msg{
 		position: relative;
-		max-height: @message-height;
-		overflow: hidden;
 		.colors(@color-default);
 	}
 	.msg-body{
