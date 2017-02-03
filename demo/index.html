@@ -108,7 +108,7 @@
 		Line height is 18 pixels, so 36 is a two-lines height.</li>
 		<li><b>collapse</b> {<i>boolean</i>} default is false. Infopane can collapse to invisible when no messages.</li>
 		<li><b>onMessage</b> {<i>function</i>} default is null. Callback on every message publish, 'this' argument - is a pane instance, only argument is a message instance.</li>
-		<li><b>onMessageRemove</b> {<i>function</i>} default is null. Callback on every message remove, 'this' - is a pane, only argument is a message.</li>
+		<li><b>onMessageRemove</b> {<i>function</i>} default is null. Callback on every message remove, 'this' - is a pane, only argument is a removed message.</li>
 	</ul>
 
 	<h2>Usage</h2>
@@ -117,7 +117,7 @@
 	<ul>
 		<li><b>text</b> {<i>string</i>} text of message, default is empty string</li>
 		<li><b>type</b> {<i>string</i>} type of message: Any string or predefined: <i>echo</i>, <i>ok</i>, <i>info</i>, <i>warn</i> or <i>err</i>.
-			Default is 'echo'. Message element will have css class msg-{type}, for example <i>msg-ok</i> or <i>msg-mytype</i></li>
+			Default is 'echo'. Message element will have css class msg-{type}, for example, <i>msg-ok</i> or <i>msg-mytype</i></li>
 		<li><b>duration</b> {<i>integer</i>} duration of message in milliseconds, default is 3000, 0 is infinite</li>
 		<li><b>closeBut</b> {<i>boolean</i>} if true - then close button will be added to the message box, default is true</li>
 	</ul>
@@ -155,8 +155,8 @@ setTimeout(function(){ message.unpublish(); },10000) // close it later
 
 	<h3>Methods</h3>
 	<ul>
-		<li><b>put(message)</b> replaces text of the message</li>
-		<li><b>append(message)</b> adds text to the end of the message</li>
+		<li><b>put(text)</b> replaces text of the message</li>
+		<li><b>append(text)</b> adds text to the end of the message</li>
 		<li><b>unpublish()</b> removes message from the pane</li>
 		<li><b>publish()</b> puts message into the pane</li>
 	</ul>
